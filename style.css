@@ -1,0 +1,542 @@
+/* =========================================================================
+   1. VARIÁVEIS GERAIS (ALTERE AS CORES E FONTES AQUI)
+   ========================================================================= */
+:root {
+    /* Paleta de Cores: Azul Marinho (Confiança/Engenharia) e Laranja (Ação/Atenção) */
+    --color-primary: #f91616; /* Laranja de destaque (Call to Action) */
+    --color-primary-dark: #ea0c0c; /* Laranja mais escuro pro efeito Hover */
+    --color-secondary: #0f172a; /* Azul Marinho profundo (Cor principal de texto e fundos) */
+    --color-secondary-light: #1e293b; /* Azul Marinho um pouco mais claro */
+    
+    --color-text: #475569; /* Cinza escuro para textos normais */
+    --color-bg: #ffffff; /* Fundo branco padrão */
+    --color-bg-light: #f8fafc; /* Fundo cinza bem clarinho para quebrar seções */
+    
+    /* Tipografia e Espaçamentos */
+    --font-main: 'Montserrat', sans-serif;
+    --transition: all 0.3s ease;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================================================
+   2. RESET BÁSICO (Remove margens padrão dos navegadores)
+   ========================================================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+html {
+    scroll-behavior: smooth; /* Faz a rolagem âncora ser suave */
+}
+
+body {
+    font-family: var(--font-main);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Classe para centralizar conteúdo limitando a largura */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================================================================
+   3. BOTÕES GERAIS
+   ========================================================================= */
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-3px); /* Efeito de flutuar ao passar o mouse */
+    box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+}
+
+.btn-outline:hover {
+    background-color: #fff;
+    color: var(--color-secondary);
+}
+
+.btn-whatsapp {
+    background-color: #25D366; /* Cor oficial do WhatsApp */
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-whatsapp:hover {
+    background-color: #128C7E;
+    transform: translateY(-3px);
+}
+
+/* Animação de pulsação para o botão do Hero */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(249, 115, 22, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(249, 115, 22, 0); }
+}
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+/* =========================================================================
+   4. CABEÇALHO (HEADER)
+   ========================================================================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: var(--transition);
+    background: transparent;
+}
+
+/* Classe adicionada via JS quando o usuário rola a página */
+header.scrolled {
+    background: #ffffff;
+    padding: 15px 0;
+    box-shadow: var(--shadow);
+}
+
+/* Alterando cor da logo e links quando o header fica branco */
+header.scrolled .logo,
+header.scrolled .nav-links a {
+    color: var(--color-secondary);
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo span {
+    color: var(--color-primary); /* Destaca a palavra "Pro" na logo */
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    color: #fff;
+    font-weight: 600;
+    transition: var(--transition);
+    position: relative;
+}
+
+/* Efeito de sublinhado nos links do menu */
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: var(--color-primary);
+    transition: var(--transition);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.menu-btn {
+    display: none; /* Escondido no Desktop */
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+}
+header.scrolled .menu-btn { color: var(--color-secondary); }
+
+/* =========================================================================
+   5. HERO SECTION (DESTAQUE PRINCIPAL)
+   ========================================================================= */
+.hero {
+    height: 100vh;
+    min-height: 600px;
+    /* --- ALTERAÇÃO SOLICITADA ABAIXO --- */
+    /* Nova imagem de quadro de luz / manutenção elétrica */
+    background: url('https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&q=80&w=1920') center/cover no-repeat;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.6) 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    color: #fff;
+    max-width: 800px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+/* =========================================================================
+   6. SEÇÕES GERAIS (Títulos e Espaçamentos)
+   ========================================================================= */
+.section {
+    padding: 100px 0;
+}
+
+.bg-light {
+    background-color: var(--color-bg-light);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 15px;
+}
+
+.section-title h2 span {
+    color: var(--color-primary);
+}
+
+/* =========================================================================
+   7. GRID DE SERVIÇOS
+   ========================================================================= */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsividade automática */
+    gap: 30px;
+}
+
+.service-card {
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    transition: var(--transition);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow);
+    border-color: transparent;
+}
+
+.service-card .icon {
+    font-size: 3rem;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+.service-card h3 {
+    color: var(--color-secondary);
+    margin-bottom: 15px;
+}
+
+/* =========================================================================
+   8. SOBRE / POR QUE NÓS
+   ========================================================================= */
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-img img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.about-text h2 {
+    font-size: 2.5rem;
+    color: var(--color-secondary);
+    margin-bottom: 20px;
+}
+
+.about-text h2 span {
+    color: var(--color-primary);
+}
+
+.features-list {
+    margin-top: 30px;
+}
+
+.features-list li {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.features-list i {
+    font-size: 2rem;
+    color: var(--color-primary);
+    background: #fff;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: max-content;
+}
+
+.features-list strong {
+    color: var(--color-secondary);
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* =========================================================================
+   9. CONTATO
+   ========================================================================= */
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+}
+
+.info-box {
+    margin-bottom: 30px;
+}
+
+.info-box i {
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+.contact-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-family: var(--font-main);
+    font-size: 1rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+    border-color: var(--color-primary);
+}
+
+/* =========================================================================
+   10. RODAPÉ (FOOTER)
+   ========================================================================= */
+footer {
+    background: var(--color-secondary);
+    color: #94a3b8;
+    padding: 60px 0 20px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.footer-logo h3 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+.footer-logo span { color: var(--color-primary); }
+
+.footer-social {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-social a {
+    color: #fff;
+    background: var(--color-secondary-light);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.footer-social a:hover {
+    background: var(--color-primary);
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-secondary-light);
+}
+
+/* =========================================================================
+   11. BOTÃO VOLTAR AO TOPO
+   ========================================================================= */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--color-primary);
+    color: #fff;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    opacity: 0; /* Escondido por padrão */
+    visibility: hidden;
+    transition: var(--transition);
+    z-index: 999;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background: var(--color-secondary);
+    transform: translateY(-5px);
+}
+
+/* =========================================================================
+   12. ANIMAÇÕES JS (REVEAL)
+   ========================================================================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Atrasos para os cards aparecerem um após o outro */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+
+/* =========================================================================
+   13. MEDIA QUERIES (RESPONSIVIDADE PARA CELULARES)
+   ========================================================================= */
+@media (max-width: 991px) {
+    .about-container, .contact-grid {
+        grid-template-columns: 1fr; /* Quebra para uma coluna em tablets */
+    }
+    
+    .hero h1 { font-size: 2.8rem; }
+}
+
+@media (max-width: 768px) {
+    /* Menu Mobile */
+    .menu-btn { display: block; }
+    
+    .nav-links, .btn-whatsapp { display: none; } /* Esconde menu padrão */
+    
+    /* Quando o menu mobile estiver ativo via JS */
+    #navbar.active {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        box-shadow: var(--shadow);
+    }
+    
+    #navbar.active .nav-links {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        gap: 20px;
+        text-align: center;
+    }
+    
+    #navbar.active .nav-links a {
+        color: var(--color-secondary);
+    }
+    
+    .hero h1 { font-size: 2.2rem; }
+    .hero-buttons { flex-direction: column; }
+    
+    .section { padding: 60px 0; }
+    .footer-content { flex-direction: column; text-align: center; gap: 20px; }
+}
